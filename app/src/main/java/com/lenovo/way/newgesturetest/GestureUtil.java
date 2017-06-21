@@ -281,6 +281,18 @@ public class GestureUtil {
                                 }
                                 continue;
 
+                            } else if (read == 8){  // back_cmd
+
+                                h[0] = (data[0] & 0xFF) | (data[1] & 0xFF) << 8;
+                                h[1] = (data[2] & 0xFF) | (data[3] & 0xFF) << 8;
+
+                                if (h[0] == 0xa0 && h[1] == 0xa0) {
+                                    int command = (data[4] & 0xFF) | (data[5] & 0xFF) << 8;
+                                    int para = (data[6] & 0xFF) | (data[7] & 0xFF) << 8;
+                                    Log.d(TAG, "back_cmd-----back command is: " + command + " , para is: " + para);
+                                }
+                                continue;
+
                             } else {
 
                                 if (totalRead == 0) {
